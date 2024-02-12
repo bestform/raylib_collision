@@ -19,4 +19,6 @@ add_executable(collision main.c
         lib/poly.h
         external/raygui.h
         lib/raycast.c
-        lib/raycast.h)
+        lib/raycast.h
+        lib/character.c
+        lib/character.h)

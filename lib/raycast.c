@@ -4,8 +4,14 @@
 
 #include "raycast.h"
 
+
+#ifndef RAYLIB_INCLUDE
+#define RAYLIB_INCLUDE
+#include <raylib.h>
 #include <raymath.h>
+#endif
 #include <stdlib.h>
+
 
 typedef struct Raycast {
     Vector2 start;

@@ -4,8 +4,35 @@
 #include "external/raygui.h"
 #include "lib/poly.h"
 #include "lib/raycast.h"
+#include "lib/character.h"
 
 int main() {
+    InitWindow(1024, 1024, "Collision");
+    SetTargetFPS(120);
+    SetConfigFlags(FLAG_MSAA_4X_HINT);
+
+    Vector2 player_pos = (Vector2) { .x = 100, .y = 100};
+    Poly *hit_box = poly_create_rect(player_pos, 20, 34);
+
+    Character *c = character_create(hit_box, player_pos,"assets/character/idle.gif");
+
+    while (!WindowShouldClose()) {
+        character_update(c, GetFrameTime());
+        BeginDrawing();
+        DrawFPS(5, 5);
+        ClearBackground(DARKGREEN);
+        character_draw(c);
+
+        EndDrawing();
+    }
+
+    character_destroy(c);
+    CloseWindow();
+
+    return 0;
+}
+
+int main_playground() {
 
     InitWindow(1024, 1024, "Collision");
     SetTargetFPS(120);

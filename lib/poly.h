@@ -5,7 +5,11 @@
 #ifndef COLLISION_POLY_H
 #define COLLISION_POLY_H
 
+#ifndef RAYLIB_INCLUDE
+#define RAYLIB_INCLUDE
+#include <raylib.h>
 #include <raymath.h>
+#endif
 #include <corecrt.h>
 
 typedef struct Poly Poly;
