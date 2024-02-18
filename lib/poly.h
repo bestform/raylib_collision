@@ -32,4 +32,6 @@ void poly_draw(Poly *p);
 
 void poly_destroy(Poly *p);
 
+Vector2 poly_get_bottom_center(Poly *p);
+
 #endif //COLLISION_POLY_H

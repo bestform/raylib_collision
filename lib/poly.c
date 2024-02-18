@@ -20,7 +20,7 @@ Poly *poly_create_rect(Vector2 pos, float width, float height) {
     p->point_count = 4;
     p->colliding = false;
     p->marked = false;
-    p->points = malloc(sizeof(Vector2) * 4);
+    p->points = malloc(sizeof(Vector2*) * 4);
 
     p->points[0] = pos;
     p->points[1] = (Vector2){.x = pos.x + width, .y = pos.y};
@@ -167,6 +167,20 @@ void poly_move_by(Poly *p, float x, float y) {
 
 void poly_set_marked(Poly *p, bool marked) {
     p->marked = marked;
+}
+
+Vector2 poly_get_bottom_center(Poly *p) {
+    float bottom = -1.0f;
+    float most_left = 999999999999.0f;
+    float most_right = -1.0f;
+    for (int i = 0; i < p->point_count; ++i) {
+        Vector2 point = p->points[i];
+        if (point.y > bottom) bottom = point.y;
+        if (point.x < most_left) most_left = point.x;
+        if (point.x > most_right) most_right = point.x;
+    }
+
+    return (Vector2) {.y = bottom, .x = ((most_right - most_left) / 2) + most_left};
 }
 
 

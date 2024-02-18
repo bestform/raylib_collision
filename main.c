@@ -11,28 +11,40 @@ int main() {
     SetTargetFPS(120);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-    Vector2 player_pos = (Vector2) { .x = 100, .y = 100};
+    Vector2 player_pos = (Vector2) { .x = 200.0f, .y = 260.0f};
     Poly *hit_box = poly_create_rect(player_pos, 20, 34);
+
+    Poly *floor = poly_create_rect((Vector2){.x = 10, .y = 400}, 400, 20);
 
     Character *c = character_create(hit_box, player_pos,"assets/character/idle.gif");
 
+    Environment env = {.colliders = &floor, .num_colliders = 1};
+
+    character_set_environment(c, &env);
+
     while (!WindowShouldClose()) {
-        character_update(c, GetFrameTime());
+
+        character_control(c);
+
+
         BeginDrawing();
+        character_update(c, GetFrameTime());
         DrawFPS(5, 5);
         ClearBackground(DARKGREEN);
         character_draw(c);
+        poly_draw(floor);
 
         EndDrawing();
     }
 
+    poly_destroy(floor);
     character_destroy(c);
     CloseWindow();
 
     return 0;
 }
 
-int main_playground() {
+int main_() {
 
     InitWindow(1024, 1024, "Collision");
     SetTargetFPS(120);

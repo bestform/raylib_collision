@@ -14,11 +14,20 @@
 
 typedef struct Character Character;
 
+typedef struct Environment {
+    Poly **colliders;
+    size_t num_colliders;
+} Environment;
+
 Character *character_create(Poly *hit_box, Vector2 position, char *idle_file_path);
+
+void character_set_environment(Character *c, Environment *env);
 
 void character_destroy(Character *c);
 
 void character_update(Character *c, float delta_time);
+
+void character_control(Character *c);
 
 void character_draw(Character *c);
 

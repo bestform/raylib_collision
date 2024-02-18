@@ -15,6 +15,8 @@ typedef struct {
 
 Raycast *raycast_create(Vector2 pos, float angle, float length);
 
+Raycast *raycast_create_pos(Vector2 start_pos, Vector2 end_pos);
+
 void raycast_set_angle(Raycast *r, float angle);
 
 void raycast_set_length(Raycast *r, float length);

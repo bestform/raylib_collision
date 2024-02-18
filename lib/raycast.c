@@ -41,6 +41,17 @@ Raycast *raycast_create(Vector2 pos, float angle, float length) {
     return r;
 }
 
+Raycast *raycast_create_pos(Vector2 start_pos, Vector2 end_pos) {
+    Raycast *r = malloc(sizeof(Raycast));
+    r->start = start_pos;
+    r->end = end_pos;
+    r->length = Vector2Distance(start_pos, end_pos);
+
+    calc_end(r);
+
+    return r;
+}
+
 void raycast_set_angle(Raycast *r, float angle) {
     r->angle = angle;
     calc_end(r);
@@ -53,8 +64,13 @@ void raycast_set_length(Raycast *r, float length) {
 }
 
 void raycast_draw(Raycast *r) {
-    DrawCircleV(r->start, 10, BLUE);
-    DrawLineV(r->start, r->end, BLUE);
+    float orig_len = r->length;
+    r->length = 100;
+    calc_end(r);
+    DrawCircleV(r->start, 3, BLUE);
+    DrawLineV(r->start, r->end, ORANGE);
+    r->length = orig_len;
+    calc_end(r);
 }
 
 Rayhit raycast_cast(Raycast *r, Poly *p, int steps) {
